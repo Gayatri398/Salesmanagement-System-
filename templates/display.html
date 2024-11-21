@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Welcome to display page</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+        {% if salesperson %}
+      <th scope="col">sales person name</th>
+        {% endif %}
+      <th scope="col">Date of Joining</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">Email</th>
+      <th scope="col">Education</th>
+      <th scope="col">Skills</th>
+        {% if salesperson %}
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
+        {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+      {% for student in students%}
+      <tr>
+        {% if salesperson %}
+      <td>{{student.sales_person}}</td>
+          {% endif %}
+      <td>{{student.joiningdate}}</td>
+      <td>{{student.name}}</td>
+      <td>{{student.age}}</td>
+      <td>{{student.mobile}}</td>
+      <td>{{student.email}}</td>
+      <td>{{student.education}}</td>
+      <td>{{student.skills}}</td>
+          {% if salesperson %}
+      <td>
+        <button type="button">
+          <a href="{% url 'update' student.id %}" style="text-decoration=none">update</a>
+        </button>
+      </td><td>
+        <button type="button" class="btn btn-denger">
+          <a href="{% url 'delete' student.id %}" style="text-decoration=none">delete</a>
+        </button>
+      </td>
+          {% endif %}
+
+
+    </tr>
+
+    {% empty %}
+    <tr>
+      <td>no student data available</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endblock %}
